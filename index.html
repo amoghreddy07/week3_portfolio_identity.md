@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yalala Amogh Reddy — AI/ML Engineer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-primary: #ededed;
+            --text-secondary: #a1a1a1;
+            --accent: #6366f1; /* Indigo */
+            --accent-glow: rgba(99, 102, 241, 0.15);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Futuristic Grid Background */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% 0%, black, transparent 80%);
+        }
+
+        /* Mouse Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(to right, #fff, #a1a1a1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Premium Card Hover */
+        .premium-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        .premium-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+        /* =========================================
+           ENHANCED HERO & VIDEO STYLES
+           ========================================= */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: contrast(1.1) saturate(1.1);
+            will-change: transform;
+            transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Dynamic gradient overlay to make text pop while showing robot */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg, 
+                #0a0a0a 0%, 
+                rgba(10,10,10,0.95) 30%, 
+                rgba(10,10,10,0.6) 60%, 
+                rgba(10,10,10,0.2) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Bottom fade to blend perfectly into the grid background */
+        .hero-bottom-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 25vh;
+            background: linear-gradient(to bottom, transparent, #0a0a0a);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Enhanced Badge */
+        .premium-badge {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Premium Buttons */
+        .btn-primary {
+            background: #fff;
+            color: #000;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+        .btn-primary:hover {
+            background: #f3f3f3;
+            box-shadow: 0 0 30px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -10px); }
+            60% { transform: translate(-50%, -5px); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="grid-bg"></div>
+    <div class="spotlight" id="spotlight"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-md bg-black/30 border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="mono text-sm font-medium tracking-wider text-white">
+                YALALA AMOGH REDDY
+            </a>
+            <div class="hidden md:flex space-x-8 text-sm text-gray-400 mono">
+                <a href="#about" class="hover:text-white transition">About</a>
+                <a href="#experience" class="hover:text-white transition">Experience</a>
+                <a href="#projects" class="hover:text-white transition">Projects</a>
+                <a href="#contact" class="hover:text-white transition">Contact</a>
+            </div>
+            <a href="#contact" class="hidden md:block px-4 py-2 text-xs mono border border-white/20 rounded-full hover:bg-white hover:text-black transition">
+                GET IN TOUCH
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section pt-24 pb-12">
+        <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+            <source src="robot1.mp4" type="video/mp4">
+        </video>
+
+        <div class="hero-overlay"></div>
+        <div class="hero-bottom-fade"></div>
+
+        <div class="reveal relative z-10 max-w-7xl mx-auto px-6 w-full text-center md:text-left">
+            <!-- Left Column: Text Content -->
+            <div class="max-w-2xl">
+                <div class="premium-badge inline-block mb-6 px-4 py-2 rounded-full mono text-xs text-indigo-400 tracking-widest flex items-center gap-2">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    GOOGLE STUDENT AMBASSADOR 2026
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-6 gradient-text leading-tight">
+                    Building Intelligent<br>Systems for the Future
+                </h1>
+                <p class="text-gray-400 text-base md:text-lg mb-10 font-light max-w-xl">
+                    AI/ML Engineer specializing in Machine Learning, Generative AI, and Computer Vision. 
+                    Transforming complex problems into elegant, intelligent solutions.
+                </p>
+                <div class="flex gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="btn-primary px-6 py-3 mono text-sm rounded-full font-medium">
+                        View Work
+                    </a>
+                    <a href="#contact" class="btn-secondary px-6 py-3 text-white mono text-sm rounded-full font-medium">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator mono text-xs text-gray-500 tracking-widest">
+            SCROLL
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-4xl mx-auto px-6 py-32">
+        <div class="reveal">
+            <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">01 / ABOUT</h2>
+            <h3 class="text-3xl md:text-5xl font-light tracking-tight mb-8 leading-tight">
+                Engineering the future of Artificial Intelligence, one model at a time.
+            </h3>
+            <div class="space-y-6 text-gray-400 text-lg font-light leading-relaxed">
+                <p>
+                    I am a passionate AI and Machine Learning enthusiast currently pursuing a B.Tech in Computer Science Engineering with a specialization in AIML at Malla Reddy Engineering College (2024 – 2028).
+                </p>
+                <p>
+                    My journey into technology began in 2018 when I received my first smartphone. Since then, I have been fascinated by how software, artificial intelligence, and innovation can solve real-world problems. I enjoy building intelligent systems, experimenting with machine learning models, and exploring the latest advancements in Generative AI.
+                </p>
+                <p>
+                    I believe in learning by building. Through internships, certifications, personal projects, and community involvement, I continuously challenge myself to grow as an engineer and problem solver. My goal is to become an AI Engineer capable of building impactful products that combine Machine Learning, GenAI, and modern software engineering practices.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="max-w-4xl mx-auto px-6 py-32">
+        <div class="reveal">
+            <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">02 / EXPERIENCE</h2>
+            <h3 class="text-3xl md:text-5xl font-light tracking-tight mb-12">Career & Community</h3>
+            
+            <div class="space-y-8">
+                <div class="premium-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-medium">Google Student Ambassador</h4>
+                        <span class="mono text-xs text-gray-500">2026</span>
+                    </div>
+                    <p class="text-indigo-400 mono text-sm mb-4">Google</p>
+                    <p class="text-gray-400 font-light">
+                        Selected to represent and promote Google's AI technologies while organizing events, workshops, and community initiatives across campus.
+                    </p>
+                </div>
+
+                <div class="premium-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-medium">Machine Learning Intern</h4>
+                        <span class="mono text-xs text-gray-500">July 2026 Cohort</span>
+                    </div>
+                    <p class="text-indigo-400 mono text-sm mb-4">FlyRank AI</p>
+                    <p class="text-gray-400 font-light">
+                        Selected for the competitive Machine Learning July 2026 Cohort. Working on advanced ML algorithms and AI-driven ranking systems.
+                    </p>
+                </div>
+
+                <div class="premium-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-medium">Machine Learning Intern</h4>
+                        <span class="mono text-xs text-gray-500">2026</span>
+                    </div>
+                    <p class="text-indigo-400 mono text-sm mb-4">SkillCraft Technology</p>
+                    <p class="text-gray-400 font-light">
+                        Working on real-world machine learning projects, gaining practical industry experience in data preprocessing, model training, and deployment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="max-w-6xl mx-auto px-6 py-32">
+        <div class="reveal">
+            <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">03 / PROJECTS</h2>
+            <h3 class="text-3xl md:text-5xl font-light tracking-tight mb-12">Selected Work</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="premium-card p-8 rounded-2xl md:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-2xl font-medium">Blueprint-AI</h4>
+                        <span class="mono text-xs bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full">Generative AI</span>
+                    </div>
+                    <p class="text-gray-400 font-light text-lg mb-6">
+                        An intelligent platform that transforms natural language app ideas into structured technical blueprints using advanced large language models.
+                    </p>
+                    <div class="mono text-sm text-gray-500 flex gap-4 flex-wrap">
+                        <span>Python</span> • <span>LLMs</span> • <span>Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <div class="premium-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-medium">Cat vs Dog Classification</h4>
+                        <span class="mono text-xs bg-white/5 text-gray-400 px-3 py-1 rounded-full">SVM</span>
+                    </div>
+                    <p class="text-gray-400 font-light mb-6">
+                        Built a robust image classification model using Support Vector Machines (SVM) to accurately classify images of cats and dogs.
+                    </p>
+                    <div class="mono text-sm text-gray-500 flex gap-4 flex-wrap">
+                        <span>Scikit-Learn</span> • <span>OpenCV</span>
+                    </div>
+                </div>
+
+                <div class="premium-card p-8 rounded-2xl">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="text-xl font-medium">YOLO Object Detection</h4>
+                        <span class="mono text-xs bg-white/5 text-gray-400 px-3 py-1 rounded-full">Computer Vision</span>
+                    </div>
+                    <p class="text-gray-400 font-light mb-6">
+                        Developed a computer vision project using YOLO for real-time object detection and recognition in complex environments.
+                    </p>
+                    <div class="mono text-sm text-gray-500 flex gap-4 flex-wrap">
+                        <span>YOLO</span> • <span>OpenCV</span> • <span>Python</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Certifications -->
+    <section class="max-w-6xl mx-auto px-6 py-32">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div class="reveal">
+                <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">04 / CAPABILITIES</h2>
+                <h3 class="text-3xl font-light tracking-tight mb-10">Technical Arsenal</h3>
+                
+                <div class="space-y-8">
+                    <div>
+                        <h4 class="mono text-sm text-gray-500 mb-3 uppercase tracking-wider">Programming</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Python</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Java</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">C</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="mono text-sm text-gray-500 mb-3 uppercase tracking-wider">AI & ML</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Scikit-Learn</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Pandas</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">NumPy</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Matplotlib</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">OpenCV</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">YOLO</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Generative AI</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">LLMs</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Prompt Engineering</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="mono text-sm text-gray-500 mb-3 uppercase tracking-wider">Tools</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Git</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">GitHub</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">VS Code</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Jupyter</span>
+                            <span class="px-4 py-2 border border-white/10 rounded-full text-sm text-gray-300 hover:border-indigo-400 hover:text-indigo-400 transition">Google Colab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">05 / CREDENTIALS</h2>
+                <h3 class="text-3xl font-light tracking-tight mb-10">Certifications</h3>
+                
+                <div class="space-y-4">
+                    <div class="premium-card p-6 rounded-xl flex items-center justify-between">
+                        <p class="text-gray-200">Google AI Courses</p>
+                        <span class="mono text-xs text-gray-500">Google</span>
+                    </div>
+                    <div class="premium-card p-6 rounded-xl flex items-center justify-between">
+                        <p class="text-gray-200">Machine Learning with Python</p>
+                        <span class="mono text-xs text-gray-500">IBM</span>
+                    </div>
+                    <div class="premium-card p-6 rounded-xl flex items-center justify-between">
+                        <p class="text-gray-200">Technology Virtual Experience</p>
+                        <span class="mono text-xs text-gray-500">Deloitte (Forage)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto px-6 py-32 text-center">
+        <div class="reveal">
+            <h2 class="mono text-xs text-indigo-400 mb-4 tracking-widest">06 / CONTACT</h2>
+            <h3 class="text-4xl md:text-6xl font-light tracking-tight mb-8 gradient-text">
+                Let's build the future of AI.
+            </h3>
+            <p class="text-gray-400 font-light mb-12 max-w-xl mx-auto">
+                I'm currently open to internship opportunities, collaborative AI projects, and tech community initiatives.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="mailto:amoghreddy0396@gmail.com" class="w-full md:w-auto px-8 py-4 btn-primary mono text-sm rounded-full font-medium">
+                    amoghreddy0396@gmail.com
+                </a>
+                <a href="https://github.com/amoghreddy07" target="_blank" class="w-full md:w-auto px-8 py-4 btn-secondary text-white mono text-sm rounded-full font-medium">
+                    GitHub
+                </a>
+                <a href="https://linkedin.com/in/yalala-amogh-reddy" target="_blank" class="w-full md:w-auto px-8 py-4 btn-secondary text-white mono text-sm rounded-full font-medium">
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 mt-20">
+        <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs mono">
+            <p>© 2024 YALALA AMOGH REDDY. ALL RIGHTS RESERVED.</p>
+            <p>BUILT WITH PRECISION IN HYDERABAD, INDIA</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mouse Spotlight Effect & Video Parallax
+        const spotlight = document.getElementById('spotlight');
+        const heroVideo = document.getElementById('heroVideo');
+        
+        document.addEventListener('mousemove', (e) => {
+            // Spotlight movement
+            spotlight.style.left = e.clientX + 'px';
+            spotlight.style.top = e.clientY + 'px';
+
+            // Gentle parallax for the background video
+            if (heroVideo && window.innerWidth >= 1024) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                heroVideo.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.05)`;
+            }
+        });
+
+        // Scroll Reveal Animation
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => {
+            observer.observe(reveal);
+        });
+    </script>
+</body>
+</html>
